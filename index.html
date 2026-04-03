@@ -639,18 +639,25 @@ function toBase64(file) {
 
 // ── SONG REQUEST FORM ──
 async function submitSongRequest() {
-  const name    = document.getElementById('reqName').value.trim();
-  const email   = document.getElementById('reqEmail').value.trim();
-  const song    = document.getElementById('reqSong').value.trim();
-  const message = document.getElementById('reqMessage').value.trim();
+  const nameEl    = document.getElementById('reqName');
+  const emailEl   = document.getElementById('reqEmail');
+  const songEl    = document.getElementById('reqSong');
+  const messageEl = document.getElementById('reqMessage');
+  const btn       = document.getElementById('reqBtn');
+  const successEl = document.getElementById('reqSuccess');
 
-  if (!name)  { alert('Please enter your name.'); return; }
-  if (!email || !email.includes('@')) { alert('Please enter a valid email.'); return; }
-  if (!song)  { alert('Please enter a song name.'); return; }
+  const name    = nameEl.value.trim();
+  const email   = emailEl.value.trim();
+  const song    = songEl.value.trim();
+  const message = messageEl.value.trim();
 
-  const btn = document.getElementById('reqBtn');
+  if (!name)                         { alert('Please enter your name.'); return; }
+  if (!email || !email.includes('@')){ alert('Please enter a valid email.'); return; }
+  if (!song)                         { alert('Please enter a song name.'); return; }
+
   btn.disabled = true;
   btn.textContent = 'Sending…';
+  successEl.style.display = 'none';
 
   try {
     await fetch(APPS_SCRIPT_URL, {
@@ -660,13 +667,16 @@ async function submitSongRequest() {
       body: JSON.stringify({ type: 'song_request', name, email, song, message })
     });
 
-    btn.style.display = 'none';
-    document.getElementById('reqSuccess').style.display = 'block';
+    // Clear fields first
+    nameEl.value    = '';
+    emailEl.value   = '';
+    songEl.value    = '';
+    messageEl.value = '';
 
-    document.getElementById('reqName').value = '';
-    document.getElementById('reqEmail').value = '';
-    document.getElementById('reqSong').value = '';
-    document.getElementById('reqMessage').value = '';
+    // Show success, reset button
+    successEl.style.display = 'block';
+    btn.disabled    = false;
+    btn.textContent = 'Send Request';
 
   } catch (err) {
     btn.disabled = false;
