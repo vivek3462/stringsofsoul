@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StringsOfSoul — Guitar Covers & Tabs</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #0a0906; --surface: #131109; --card: #1a1710; --border: #2e2b1f;
+      --gold: #c9a84c; --gold-light: #e8c96a; --gold-dim: #7a6228;
+      --cream: #f0e8d0; --text: #d4c9a8; --muted: #7a7260;
+      --accent: #b85c38; --accent-light: #e07050; --green: #4a7c59;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; font-weight: 300; line-height: 1.7; overflow-x: hidden; }
+    body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E"); pointer-events: none; z-index: 9999; opacity: 0.4; }
+
+    /* NAV */
+    nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 1.2rem 2.5rem; display: flex; align-items: center; justify-content: space-between; background: linear-gradient(to bottom, rgba(10,9,6,0.97) 0%, transparent 100%); backdrop-filter: blur(2px); }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 900; color: var(--gold); letter-spacing: 0.04em; text-decoration: none; }
+    .nav-logo span { color: var(--cream); font-style: italic; font-weight: 400; }
+    .nav-links { display: flex; gap: 2.2rem; list-style: none; }
+    .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.82rem; letter-spacing: 0.12em; text-transform: uppercase; transition: color 0.3s; }
+    .nav-links a:hover { color: var(--gold); }
+    .nav-cta { background: var(--gold); color: var(--bg) !important; padding: 0.45rem 1.2rem; border-radius: 2px; font-weight: 500 !important; }
+
+    /* HERO */
+    .hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 7rem 2rem 4rem; position: relative; overflow: hidden; }
+    .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 50% at 50% 60%, rgba(201,168,76,0.08) 0%, transparent 70%), radial-gradient(ellipse 40% 30% at 20% 20%, rgba(184,92,56,0.06) 0%, transparent 60%); }
+    .hero-strings { position: absolute; inset: 0; pointer-events: none; }
+    .hero-strings line { stroke: var(--border); stroke-width: 0.5; opacity: 0.6; }
+    .hero-eyebrow { font-family: 'Space Mono', monospace; font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 1.5rem; animation: fadeUp 0.8s ease both; }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(3rem, 8vw, 6.5rem); font-weight: 900; line-height: 1.05; color: var(--cream); margin-bottom: 0.3rem; animation: fadeUp 0.9s 0.1s ease both; }
+    .hero h1 em { font-style: italic; color: var(--gold); }
+    .hero-sub { font-family: 'Playfair Display', serif; font-style: italic; font-size: clamp(1rem, 2.5vw, 1.4rem); color: var(--gold-dim); margin-bottom: 2rem; animation: fadeUp 0.9s 0.2s ease both; }
+    .hero-desc { max-width: 480px; font-size: 0.97rem; color: var(--muted); margin-bottom: 3rem; animation: fadeUp 1s 0.3s ease both; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; animation: fadeUp 1s 0.45s ease both; }
+    .btn-primary { background: var(--gold); color: var(--bg); padding: 0.85rem 2.2rem; border: none; border-radius: 2px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.06em; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.25s, transform 0.2s; }
+    .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+    .btn-outline { background: transparent; color: var(--gold); padding: 0.85rem 2.2rem; border: 1px solid var(--gold-dim); border-radius: 2px; font-family: 'DM Sans', sans-serif; font-size: 0.9rem; letter-spacing: 0.06em; cursor: pointer; text-decoration: none; display: inline-block; transition: border-color 0.25s, color 0.25s, transform 0.2s; }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold-light); transform: translateY(-1px); }
+    .scroll-hint { position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.4rem; color: var(--muted); font-size: 0.7rem; letter-spacing: 0.15em; text-transform: uppercase; animation: fadeIn 1.5s 1s ease both; }
+    .scroll-line { width: 1px; height: 40px; background: linear-gradient(to bottom, var(--gold-dim), transparent); animation: scrollPulse 2s infinite; }
+
+    /* COMMONS */
+    section { padding: 6rem 2rem; }
+    .section-label { font-family: 'Space Mono', monospace; font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 0.7rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 700; color: var(--cream); line-height: 1.2; margin-bottom: 1rem; }
+    .section-title em { color: var(--gold); font-style: italic; }
+    .container { max-width: 1100px; margin: 0 auto; }
+    .divider { width: 100%; height: 1px; background: linear-gradient(to right, transparent, var(--border), transparent); }
+
+    /* COVERS */
+    #covers { background: var(--surface); }
+    .covers-intro { max-width: 600px; margin-bottom: 3.5rem; }
+    .covers-intro p { color: var(--muted); font-size: 0.97rem; }
+    .filter-tabs { display: flex; gap: 0.5rem; margin-bottom: 2.5rem; flex-wrap: wrap; }
+    .filter-tab { padding: 0.4rem 1.1rem; border: 1px solid var(--border); border-radius: 2px; background: transparent; color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 0.8rem; letter-spacing: 0.08em; cursor: pointer; transition: all 0.2s; }
+    .filter-tab.active, .filter-tab:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,0.06); }
+    .covers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
+    .cover-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; transition: border-color 0.3s, transform 0.3s; }
+    .cover-card:hover { border-color: var(--gold-dim); transform: translateY(-3px); }
+    .cover-thumb { position: relative; aspect-ratio: 16/9; background: #1e1a10; overflow: hidden; }
+    .cover-thumb iframe { width: 100%; height: 100%; border: none; }
+    .cover-info { padding: 1.2rem 1.3rem; }
+    .cover-lang { font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; padding: 0.2rem 0.6rem; border-radius: 2px; margin-bottom: 0.6rem; display: inline-block; }
+    .cover-lang.tamil { background: rgba(74,124,89,0.2); color: var(--green); border: 1px solid rgba(74,124,89,0.3); }
+    .cover-lang.hindi { background: rgba(184,92,56,0.15); color: var(--accent-light); border: 1px solid rgba(184,92,56,0.3); }
+    .cover-title { font-family: 'Playfair Display', serif; font-size: 1.08rem; font-weight: 700; color: var(--cream); margin-bottom: 0.25rem; }
+    .cover-movie { font-size: 0.82rem; color: var(--muted); margin-bottom: 0.9rem; }
+    .cover-footer { display: flex; align-items: center; justify-content: space-between; }
+    .cover-difficulty { font-size: 0.75rem; color: var(--muted); display: flex; align-items: center; gap: 0.4rem; }
+    .dots { display: flex; gap: 3px; }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); }
+    .dot.filled { background: var(--gold); }
+    .tab-badge { font-family: 'Space Mono', monospace; font-size: 0.68rem; letter-spacing: 0.1em; color: var(--gold); border: 1px solid var(--gold-dim); padding: 0.18rem 0.55rem; border-radius: 2px; cursor: pointer; transition: all 0.2s; }
+    .tab-badge:hover { background: rgba(201,168,76,0.1); }
+
+    /* TABS SECTION */
+    #tabs { background: var(--bg); }
+    .tabs-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .tabs-left p { color: var(--muted); font-size: 0.97rem; margin-bottom: 1.5rem; }
+    .tab-features { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; margin-bottom: 2rem; }
+    .tab-features li { display: flex; align-items: flex-start; gap: 0.75rem; font-size: 0.9rem; color: var(--text); }
+    .feat-icon { width: 18px; height: 18px; background: rgba(201,168,76,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 3px; }
+    .feat-icon svg { width: 10px; height: 10px; stroke: var(--gold); fill: none; }
+    .pricing-card { background: var(--card); border: 1px solid var(--border); border-radius: 4px; overflow: hidden; position: relative; }
+    .pricing-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(to right, var(--gold-dim), var(--gold), var(--gold-dim)); }
+    .pricing-header { padding: 2rem 2rem 1.5rem; }
+    .pricing-header h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--cream); margin-bottom: 0.3rem; }
+    .pricing-header p { font-size: 0.85rem; color: var(--muted); }
+    .price-display { padding: 1.5rem 2rem; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: rgba(201,168,76,0.04); }
+    .price-row { display: flex; align-items: baseline; gap: 0.4rem; margin-bottom: 0.2rem; }
+    .currency { font-family: 'Space Mono', monospace; font-size: 1rem; color: var(--gold-dim); }
+    .price-amount { font-family: 'Playfair Display', serif; font-size: 2.8rem; font-weight: 900; color: var(--gold); line-height: 1; }
+    .price-note { font-size: 0.8rem; color: var(--muted); }
+    .pricing-items { padding: 1.5rem 2rem; list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+    .pricing-items li { font-size: 0.87rem; color: var(--text); display: flex; align-items: center; gap: 0.6rem; }
+    .pricing-items li::before { content: '✦'; color: var(--gold-dim); font-size: 0.6rem; flex-shrink: 0; }
+    .pricing-action { padding: 0 2rem 2rem; }
+    .phonepay-note { margin-top: 1rem; padding: 0.8rem 1rem; background: rgba(74,124,89,0.1); border: 1px solid rgba(74,124,89,0.2); border-radius: 2px; font-size: 0.8rem; color: #6aad82; display: flex; align-items: center; gap: 0.5rem; }
+
+    /* HOW IT WORKS */
+    #how { background: var(--surface); }
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 2rem; margin-top: 3rem; }
+    .step { padding: 2rem 1.5rem; background: var(--card); border: 1px solid var(--border); border-radius: 4px; }
+    .step-num { font-family: 'Playfair Display', serif; font-size: 3.5rem; font-weight: 900; color: var(--border); line-height: 1; margin-bottom: 1rem; }
+    .step h3 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--cream); margin-bottom: 0.5rem; }
+    .step p { font-size: 0.87rem; color: var(--muted); }
+
+    /* ABOUT */
+    #about { background: var(--bg); }
+    .about-layout { display: grid; grid-template-columns: 1fr 1.5fr; gap: 4rem; align-items: center; }
+    .about-graphic { aspect-ratio: 1; background: var(--card); border: 1px solid var(--border); border-radius: 4px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    .guitar-svg { width: 70%; opacity: 0.6; }
+    .about-text p { color: var(--muted); font-size: 0.97rem; margin-bottom: 1rem; }
+    .about-text p strong { color: var(--text); font-weight: 500; }
+    .stats { display: flex; gap: 2.5rem; margin-top: 2rem; flex-wrap: wrap; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 900; color: var(--gold); line-height: 1; }
+    .stat-label { font-size: 0.78rem; color: var(--muted); letter-spacing: 0.08em; }
+
+    /* CONTACT */
+    #contact { background: var(--surface); }
+    .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .contact-info h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--cream); margin-bottom: 1rem; }
+    .contact-info p { color: var(--muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 0.8rem; }
+    .contact-link { display: flex; align-items: center; gap: 0.8rem; color: var(--text); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+    .contact-link:hover { color: var(--gold); }
+    .link-icon { width: 36px; height: 36px; background: var(--card); border: 1px solid var(--border); border-radius: 2px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .link-icon svg { width: 16px; height: 16px; }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-label { font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .form-input, .form-textarea, .song-select { background: var(--card); border: 1px solid var(--border); border-radius: 2px; padding: 0.75rem 1rem; color: var(--cream); font-family: 'DM Sans', sans-serif; font-size: 0.9rem; outline: none; transition: border-color 0.2s; width: 100%; }
+    .form-input:focus, .form-textarea:focus, .song-select:focus { border-color: var(--gold-dim); }
+    .form-textarea { resize: vertical; min-height: 110px; }
+    .song-select { cursor: pointer; }
+
+    /* FOOTER */
+    footer { background: var(--bg); border-top: 1px solid var(--border); padding: 2.5rem 2rem; text-align: center; }
+    .footer-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--gold); font-weight: 900; margin-bottom: 0.5rem; }
+    .footer-logo span { font-style: italic; font-weight: 400; color: var(--cream); }
+    footer p { font-size: 0.78rem; color: var(--muted); }
+
+    /* MODAL */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(10,9,6,0.93); z-index: 200; align-items: flex-start; justify-content: center; padding: 2rem 1rem; overflow-y: auto; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: var(--card); border: 1px solid var(--border); border-radius: 4px; max-width: 500px; width: 100%; padding: 2.5rem; position: relative; margin: auto; }
+    .modal-close { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: var(--muted); font-size: 1.4rem; cursor: pointer; line-height: 1; }
+    .modal h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--cream); margin-bottom: 0.3rem; }
+    .modal > p { color: var(--muted); font-size: 0.87rem; margin-bottom: 1.5rem; }
+
+    /* MODAL STEPS */
+    .modal-steps { display: flex; flex-direction: column; gap: 0.9rem; margin-bottom: 1.4rem; }
+    .modal-step { display: flex; gap: 1rem; align-items: flex-start; }
+    .ms-num { width: 26px; height: 26px; border-radius: 50%; background: rgba(201,168,76,0.15); border: 1px solid var(--gold-dim); display: flex; align-items: center; justify-content: center; font-family: 'Space Mono', monospace; font-size: 0.7rem; color: var(--gold); flex-shrink: 0; }
+    .ms-text strong { display: block; color: var(--text); font-size: 0.88rem; margin-bottom: 0.1rem; }
+    .ms-text span { color: var(--muted); font-size: 0.82rem; }
+
+    /* UPI BOX */
+    .upi-box { background: rgba(201,168,76,0.06); border: 1px solid var(--gold-dim); border-radius: 2px; padding: 0.9rem 1.2rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1.4rem; }
+    .upi-id { font-family: 'Space Mono', monospace; font-size: 0.9rem; color: var(--gold); }
+    .copy-btn { background: var(--gold); color: var(--bg); border: none; border-radius: 2px; padding: 0.35rem 0.9rem; font-size: 0.75rem; cursor: pointer; font-family: 'DM Sans', sans-serif; font-weight: 500; transition: background 0.2s; flex-shrink: 0; }
+    .copy-btn:hover { background: var(--gold-light); }
+
+    /* PURCHASE FORM */
+    .purchase-form { display: flex; flex-direction: column; gap: 0.85rem; }
+    .purchase-form .form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+
+    /* FILE UPLOAD */
+    .file-upload-area { border: 1px dashed var(--gold-dim); border-radius: 2px; padding: 1rem; text-align: center; cursor: pointer; transition: all 0.2s; position: relative; }
+    .file-upload-area:hover { border-color: var(--gold); background: rgba(201,168,76,0.04); }
+    .file-upload-area input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; width: 100%; height: 100%; }
+    .file-upload-area p { font-size: 0.8rem; color: var(--muted); }
+    .file-upload-area strong { display: block; font-size: 0.85rem; color: var(--text); margin-bottom: 0.2rem; }
+    .file-name { font-size: 0.78rem; color: var(--gold); margin-top: 0.4rem; display: none; }
+
+    /* INFO / SUCCESS */
+    .info-note { font-size: 0.75rem; color: var(--muted); padding: 0.7rem 0.9rem; background: rgba(201,168,76,0.04); border-left: 2px solid var(--gold-dim); border-radius: 0 2px 2px 0; line-height: 1.5; }
+    .submit-btn { width: 100%; margin-top: 0.3rem; }
+    .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
+    .success-box { display: none; text-align: center; padding: 1.5rem; background: rgba(74,124,89,0.1); border: 1px solid rgba(74,124,89,0.3); border-radius: 4px; margin-top: 1rem; }
+    .success-box.show { display: block; }
+    .success-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+    .success-box h3 { font-family: 'Playfair Display', serif; color: var(--cream); margin-bottom: 0.4rem; }
+    .success-box p { font-size: 0.82rem; color: var(--muted); }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .tabs-layout, .about-layout, .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      nav .nav-links { display: none; }
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes scrollPulse { 0%, 100% { opacity: 0.4; } 50% { opacity: 1; } }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Strings<span>ofSoul</span></a>
+  <ul class="nav-links">
+    <li><a href="#covers">Covers</a></li>
+    <li><a href="#tabs">Tabs</a></li>
+    <li><a href="#how">How it Works</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#tabs" class="nav-cta">Get Tabs</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <svg class="hero-strings" viewBox="0 0 1440 900" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <line x1="0" y1="150" x2="1440" y2="150"/><line x1="0" y1="250" x2="1440" y2="250"/>
+    <line x1="0" y1="350" x2="1440" y2="350"/><line x1="0" y1="450" x2="1440" y2="450"/>
+    <line x1="0" y1="550" x2="1440" y2="550"/><line x1="0" y1="650" x2="1440" y2="650"/>
+  </svg>
+  <p class="hero-eyebrow">Tamil &amp; Hindi Guitar Covers</p>
+  <h1>Where <em>Melody</em><br>Meets Strings</h1>
+  <p class="hero-sub">— fingerstyle covers &amp; downloadable tabs —</p>
+  <p class="hero-desc">Soulful guitar arrangements of your favourite Tamil &amp; Hindi film songs. Watch the covers, then download the tabs to learn them yourself.</p>
+  <div class="hero-actions">
+    <a href="#covers" class="btn-primary">Watch Covers</a>
+    <a href="#tabs" class="btn-outline">Browse Tabs</a>
+  </div>
+  <div class="scroll-hint"><span>Scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<div class="divider"></div>
+
+<section id="covers">
+  <div class="container">
+    <div class="covers-intro">
+      <p class="section-label">YouTube Covers</p>
+      <h2 class="section-title">Featured <em>Covers</em></h2>
+      <p>Guitar arrangements crafted with care — from AR Rahman's timeless classics to Ilaiyaraaja's soul-stirring melodies, and the best of Bollywood.</p>
+    </div>
+    <div class="filter-tabs">
+      <button class="filter-tab active" onclick="filterCovers('all',this)">All</button>
+      <button class="filter-tab" onclick="filterCovers('tamil',this)">Tamil</button>
+      <button class="filter-tab" onclick="filterCovers('hindi',this)">Hindi</button>
+    </div>
+    <div class="covers-grid" id="coversGrid"></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="tabs">
+  <div class="container">
+    <div class="tabs-layout">
+      <div class="tabs-left">
+        <p class="section-label">Guitar Tabs</p>
+        <h2 class="section-title">Learn Every<br><em>Note</em></h2>
+        <p>Detailed guitar tablature for each cover — accurately transcribed, clearly formatted, ready to print or view on any device.</p>
+        <ul class="tab-features">
+          <li><div class="feat-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Standard notation + guitar tab format</li>
+          <li><div class="feat-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Includes chords, fingering &amp; capo positions</li>
+          <li><div class="feat-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Google Drive link emailed to you after payment</li>
+          <li><div class="feat-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>Beginner to intermediate difficulty levels</li>
+          <li><div class="feat-icon"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div>New tabs added regularly</li>
+        </ul>
+      </div>
+      <div>
+        <div class="pricing-card">
+          <div class="pricing-header">
+            <h3>Single Tab Download</h3>
+            <p>Pay once · Drive link sent to your email</p>
+          </div>
+          <div class="price-display">
+            <div class="price-row"><span class="currency">₹</span><span class="price-amount">499</span></div>
+            <p class="price-note">per tab — via PhonePe / any UPI app</p>
+          </div>
+          <ul class="pricing-items">
+            <li>Full tablature PDF (printable)</li>
+            <li>Chord diagrams included</li>
+            <li>Google Drive download link via email</li>
+            <li>One-time payment, no subscription</li>
+          </ul>
+          <div class="pricing-action">
+            <button class="btn-primary" style="width:100%" onclick="openPayModal()">Buy a Tab Now</button>
+            <div class="phonepay-note">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+              Secure payment via PhonePe &amp; UPI · Auto email delivery
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="how">
+  <div class="container">
+    <p class="section-label">Process</p>
+    <h2 class="section-title">How to Get Your <em>Tabs</em></h2>
+    <div class="steps">
+      <div class="step"><div class="step-num">01</div><h3>Pick Your Song</h3><p>Browse the covers above and select the song you want to learn on guitar.</p></div>
+      <div class="step"><div class="step-num">02</div><h3>Pay ₹499 via UPI</h3><p>Send to our UPI ID using PhonePe, GPay, or any UPI app. Take a screenshot.</p></div>
+      <div class="step"><div class="step-num">03</div><h3>Submit the Form</h3><p>Fill in your name, email, song choice &amp; upload the payment screenshot.</p></div>
+      <div class="step"><div class="step-num">04</div><h3>Check Your Email</h3><p>A Google Drive download link arrives in your inbox. Click and download your tab PDF!</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="about">
+  <div class="container">
+    <div class="about-layout">
+      <div class="about-graphic">
+        <svg class="guitar-svg" viewBox="0 0 200 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="100" cy="300" rx="70" ry="75" fill="#1e1a10" stroke="#c9a84c" stroke-width="1.5"/>
+          <ellipse cx="100" cy="220" rx="45" ry="50" fill="#1e1a10" stroke="#c9a84c" stroke-width="1.5"/>
+          <path d="M55 270 Q40 248 55 222" stroke="#c9a84c" stroke-width="1.5" fill="none"/>
+          <path d="M145 270 Q160 248 145 222" stroke="#c9a84c" stroke-width="1.5" fill="none"/>
+          <circle cx="100" cy="300" r="22" stroke="#c9a84c" stroke-width="1" fill="none" opacity="0.5"/>
+          <rect x="90" y="90" width="20" height="130" fill="#1e1a10" stroke="#c9a84c" stroke-width="1.2"/>
+          <line x1="90" y1="110" x2="110" y2="110" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+          <line x1="90" y1="130" x2="110" y2="130" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+          <line x1="90" y1="150" x2="110" y2="150" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+          <line x1="90" y1="170" x2="110" y2="170" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+          <line x1="90" y1="190" x2="110" y2="190" stroke="#c9a84c" stroke-width="0.8" opacity="0.6"/>
+          <line x1="95" y1="85" x2="95" y2="290" stroke="#c9a84c" stroke-width="0.5" opacity="0.4"/>
+          <line x1="98" y1="85" x2="98" y2="290" stroke="#c9a84c" stroke-width="0.5" opacity="0.4"/>
+          <line x1="101" y1="85" x2="101" y2="290" stroke="#c9a84c" stroke-width="0.5" opacity="0.4"/>
+          <line x1="104" y1="85" x2="104" y2="290" stroke="#c9a84c" stroke-width="0.5" opacity="0.4"/>
+          <line x1="107" y1="85" x2="107" y2="290" stroke="#c9a84c" stroke-width="0.5" opacity="0.4"/>
+          <rect x="82" y="60" width="36" height="30" rx="3" fill="#1e1a10" stroke="#c9a84c" stroke-width="1.2"/>
+          <circle cx="87" cy="67" r="3" fill="#c9a84c" opacity="0.6"/>
+          <circle cx="87" cy="78" r="3" fill="#c9a84c" opacity="0.6"/>
+          <circle cx="100" cy="62" r="3" fill="#c9a84c" opacity="0.6"/>
+          <circle cx="113" cy="67" r="3" fill="#c9a84c" opacity="0.6"/>
+          <circle cx="113" cy="78" r="3" fill="#c9a84c" opacity="0.6"/>
+          <rect x="80" y="318" width="40" height="6" rx="1" fill="#c9a84c" opacity="0.4"/>
+        </svg>
+      </div>
+      <div class="about-text">
+        <p class="section-label">About</p>
+        <h2 class="section-title">The <em>Story</em></h2>
+        <p>A self-taught guitarist with a deep love for Tamil &amp; Hindi film music. Every cover is a tribute to the composers who shaped generations — AR Rahman, Ilaiyaraaja, Harris Jayaraj, Vishal–Shekhar, and more.</p>
+        <p>The goal is simple: <strong>make beautiful music accessible.</strong> Watch, learn, and let your fingers find the same melodies that move your soul.</p>
+        <p>All tabs are personally transcribed — not auto-generated — ensuring accuracy, playability, and every nuance of the original captured.</p>
+        <div class="stats">
+          <div><div class="stat-num">3+</div><div class="stat-label">Covers Made</div></div>
+          <div><div class="stat-num">2</div><div class="stat-label">Languages</div></div>
+          <div><div class="stat-num">100%</div><div class="stat-label">Hand Transcribed</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section id="contact">
+  <div class="container">
+    <p class="section-label">Reach Out</p>
+    <h2 class="section-title" style="margin-bottom:2.5rem">Get in <em>Touch</em></h2>
+    <div class="contact-inner">
+      <div class="contact-info">
+        <h3>Request a Song</h3>
+        <p>Have a favourite song you'd like covered or tabbed? Drop a message and I'll try to include it in upcoming videos.</p>
+        <div class="contact-links">
+          <a href="https://youtube.com/@StringsofAura" target="_blank" class="contact-link">
+            <div class="link-icon"><svg viewBox="0 0 24 24" fill="#ff0000"><path d="M23 7s-.3-1.9-1.2-2.7c-1.1-1.2-2.4-1.2-3-1.3C16.2 3 12 3 12 3s-4.2 0-6.8.1c-.6.1-1.9.1-3 1.3C1.3 5.1 1 7 1 7S.7 9.1.7 11.2v2c0 2.1.3 4.2.3 4.2s.3 1.9 1.2 2.7c1.1 1.2 2.6 1.1 3.3 1.2C7.2 21.4 12 21.5 12 21.5s4.2 0 6.8-.2c.6-.1 1.9-.1 3-1.3.9-.8 1.2-2.7 1.2-2.7s.3-2.1.3-4.2v-2C23.3 9.1 23 7 23 7zm-13.5 8.5V8.5l8 3.5-8 3.5z"/></svg></div>
+            YouTube — @StringsofAura
+          </a>
+          <a href="https://wa.me/917502251174" target="_blank" class="contact-link">
+            <div class="link-icon"><svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.2s-.8 1-.9 1.2c-.2.2-.3.2-.6.1-1.7-.8-2.8-1.5-3.9-3.4-.3-.5.3-.5.8-1.5.1-.2 0-.4-.1-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5H8c-.2 0-.5.1-.8.4S6 9.4 6 10.6c0 1.2.9 2.4 1 2.5 1.2 1.8 2.6 3.1 4.1 3.9 2.4 1 3.3.8 3.9.7.6-.1 1.8-.7 2.1-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.3-.8-.5z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.7 1.5 5.3L2 22l4.8-1.5C8.3 21.5 10.1 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.8 0-3.5-.5-4.9-1.4l-.3-.2-3.3 1 1-3.3-.2-.3C3.4 14.6 3 13.3 3 12 3 7.1 7.1 3 12 3s9 4.1 9 9c0 4.9-4.1 9-9 9z"/></svg></div>
+            WhatsApp — +91 75022 51174
+          </a>
+          <a href="mailto:vivek3462@gmail.com" class="contact-link">
+            <div class="link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3,5 12,13 21,5"/></svg></div>
+            vivek3462@gmail.com
+          </a>
+        </div>
+      </div>
+      <div>
+        <div class="contact-form">
+          <div class="form-group"><label class="form-label">Your Name</label><input class="form-input" type="text" placeholder="Enter your name"/></div>
+          <div class="form-group"><label class="form-label">Song Request</label><input class="form-input" type="text" placeholder="Song name &amp; movie / artist"/></div>
+          <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Any notes or questions..."></textarea></div>
+          <button class="btn-primary" onclick="alert('Message sent! I will get back to you soon.')">Send Request</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">Strings<span>ofSoul</span></div>
+  <p style="margin-top:0.5rem">© 2025 StringsOfSoul · Handcrafted guitar covers &amp; tabs</p>
+  <p style="margin-top:0.3rem">Made with ♪ and passion</p>
+</footer>
+
+<!-- ══════════════════════════════════════════════
+     PAYMENT MODAL WITH AUTO-EMAIL DELIVERY FORM
+     ══════════════════════════════════════════════ -->
+<div class="modal-overlay" id="payModal">
+  <div class="modal">
+    <button class="modal-close" onclick="closePayModal()">×</button>
+    <h2>Get Your Tab</h2>
+    <p>Pay via UPI → Fill the form → Tab link lands in your email automatically.</p>
+
+    <div class="modal-steps">
+      <div class="modal-step">
+        <div class="ms-num">1</div>
+        <div class="ms-text"><strong>Pay ₹499 via UPI</strong><span>Copy the ID below and pay on PhonePe, GPay, or any UPI app</span></div>
+      </div>
+      <div class="modal-step">
+        <div class="ms-num">2</div>
+        <div class="ms-text"><strong>Fill the form below</strong><span>Enter your email, pick the song &amp; upload your payment screenshot</span></div>
+      </div>
+      <div class="modal-step">
+        <div class="ms-num">3</div>
+        <div class="ms-text"><strong>Check your inbox</strong><span>Google Drive download link sent to your email — click &amp; download!</span></div>
+      </div>
+    </div>
+
+    <div class="upi-box">
+      <span class="upi-id">7502251174@ybl</span>
+      <button class="copy-btn" onclick="copyUPI()">Copy UPI</button>
+    </div>
+
+    <div class="purchase-form">
+      <div class="form-group">
+        <label class="form-label">Your Full Name *</label>
+        <input class="form-input" type="text" id="buyerName" placeholder="Enter your name"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address * <span style="color:var(--gold-dim);font-size:0.7rem">(Tab link will be sent here)</span></label>
+        <input class="form-input" type="email" id="buyerEmail" placeholder="your@email.com"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Select Song *</label>
+        <select class="song-select" id="songSelect">
+          <option value="">— Choose a song —</option>
+          <option value="Aaja Raja — KH RK Reunion (Tamil)">Aaja Raja — KH RK Reunion (Tamil)</option>
+          <option value="CSK Whistle Podu — Chennai Super Kings (Tamil)">CSK Whistle Podu — Chennai Super Kings (Tamil)</option>
+          <option value="Pavazha Malli — Pavazhamalli Saiuabhayankar (Tamil)">Pavazha Malli — Pavazhamalli Saiuabhayankar (Tamil)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">UPI Transaction ID *</label>
+        <input class="form-input" type="text" id="txnId" placeholder="e.g. 4258XXXXXXXX (from PhonePe / GPay success screen)"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Payment Screenshot *</label>
+        <div class="file-upload-area" id="uploadArea">
+          <input type="file" id="screenshotFile" accept="image/*" onchange="handleFileChange(this)"/>
+          <strong>📎 Tap to upload screenshot</strong>
+          <p>JPG or PNG from your PhonePe / GPay</p>
+          <div class="file-name" id="fileName"></div>
+        </div>
+      </div>
+      <div class="info-note">🔒 Your details are only used to verify payment and send your tab. We never share your information with anyone.</div>
+      <button class="btn-primary submit-btn" id="submitBtn" onclick="submitPurchase()">Submit &amp; Get My Tab →</button>
+      <div class="success-box" id="successBox">
+        <div class="success-icon">🎸</div>
+        <h3>You're all set!</h3>
+        <p>Payment received! Your tab download link will be sent to <strong id="confirmedEmail" style="color:var(--gold)"></strong> within a few hours.</p>
+        <p style="margin-top:0.6rem">Questions? WhatsApp +91 75022 51174</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════
+// STEP 1 — COVERS DATA
+// Add more songs here as you create covers
+// ══════════════════════════════════════════════════════
+const covers = [
+  { id: 'pmZXh8ze558', lang: 'tamil', title: 'Aaja Raja',       movie: 'KH RK Reunion',                    difficulty: 3 },
+  { id: 'cgjY7vuKLNc', lang: 'tamil', title: 'CSK Whistle Podu',movie: 'Chennai Super Kings',               difficulty: 2 },
+  { id: 'Q8XstySP8a4', lang: 'tamil', title: 'Pavazha Malli',   movie: 'Pavazhamalli Saiuabhayankar',       difficulty: 3 },
+];
+
+// ══════════════════════════════════════════════════════
+// STEP 2 — GOOGLE DRIVE LINKS PER SONG
+// For each song, paste the sharing link to its Drive folder
+// (Right-click folder in Drive → Share → Anyone with link → Copy)
+// ══════════════════════════════════════════════════════
+const TAB_LINKS = {
+  'Aaja Raja — KH RK Reunion (Tamil)':
+      'https://drive.google.com/drive/folders/1fXhx2AfwEGok2UyRkqESLHCnZRIr5m2f?usp=drive_link',
+  'CSK Whistle Podu — Chennai Super Kings (Tamil)':
+      'https://drive.google.com/drive/folders/PASTE_YOUR_FOLDER_ID_HERE',
+  'Pavazha Malli — Pavazhamalli Saiuabhayankar (Tamil)':
+      'https://drive.google.com/drive/folders/PASTE_YOUR_FOLDER_ID_HERE',
+};
+
+// ══════════════════════════════════════════════════════
+// STEP 3 — GOOGLE APPS SCRIPT URL
+// Paste your deployed Apps Script Web App URL here
+// (Setup instructions provided separately below)
+// ══════════════════════════════════════════════════════
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwH9izZcQrk-_Vsu1riubAZhpSpgH3j7-icIQVZt2CF12ixjuQ_3f-Qc0M0ALybHZIA/exec';
+
+// ── BUILD COVER CARDS ──
+function buildCards(filter) {
+  const grid = document.getElementById('coversGrid');
+  const list = filter === 'all' ? covers : covers.filter(c => c.lang === filter);
+  grid.innerHTML = list.map(c => `
+    <div class="cover-card">
+      <div class="cover-thumb">
+        <iframe src="https://www.youtube.com/embed/${c.id}" loading="lazy"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen></iframe>
+      </div>
+      <div class="cover-info">
+        <span class="cover-lang ${c.lang}">${c.lang === 'tamil' ? 'Tamil' : 'Hindi'}</span>
+        <div class="cover-title">${c.title}</div>
+        <div class="cover-movie">${c.movie}</div>
+        <div class="cover-footer">
+          <div class="cover-difficulty">
+            <span>Difficulty</span>
+            <div class="dots">${[1,2,3].map(i=>`<div class="dot${i<=c.difficulty?' filled':''}"></div>`).join('')}</div>
+          </div>
+          <span class="tab-badge" onclick="openPayModal('${c.title} — ${c.movie} (${c.lang==='tamil'?'Tamil':'Hindi'})')">GET TAB</span>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterCovers(lang, el) {
+  document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  buildCards(lang);
+}
+
+buildCards('all');
+
+// ── MODAL ──
+function openPayModal(songName) {
+  document.getElementById('payModal').classList.add('open');
+  document.getElementById('successBox').classList.remove('show');
+  document.getElementById('submitBtn').style.display = 'block';
+  document.getElementById('submitBtn').disabled = false;
+  document.getElementById('submitBtn').textContent = 'Submit & Get My Tab →';
+  if (songName) {
+    const sel = document.getElementById('songSelect');
+    for (let i = 0; i < sel.options.length; i++) {
+      if (sel.options[i].value === songName) { sel.selectedIndex = i; break; }
+    }
+  }
+}
+
+function closePayModal() {
+  document.getElementById('payModal').classList.remove('open');
+}
+
+document.getElementById('payModal').addEventListener('click', function(e) {
+  if (e.target === this) closePayModal();
+});
+
+// ── COPY UPI ──
+function copyUPI() {
+  navigator.clipboard.writeText('7502251174@ybl').then(() => {
+    const btn = document.querySelector('.copy-btn');
+    btn.textContent = '✓ Copied!';
+    setTimeout(() => btn.textContent = 'Copy UPI', 2000);
+  });
+}
+
+// ── FILE UPLOAD ──
+function handleFileChange(input) {
+  const fn = document.getElementById('fileName');
+  if (input.files && input.files[0]) {
+    fn.textContent = '✓ ' + input.files[0].name;
+    fn.style.display = 'block';
+  }
+}
+
+// ── SUBMIT PURCHASE ──
+async function submitPurchase() {
+  const name  = document.getElementById('buyerName').value.trim();
+  const email = document.getElementById('buyerEmail').value.trim();
+  const song  = document.getElementById('songSelect').value;
+  const txnId = document.getElementById('txnId').value.trim();
+  const file  = document.getElementById('screenshotFile').files[0];
+
+  if (!name)                        { alert('Please enter your name.'); return; }
+  if (!email || !email.includes('@')){ alert('Please enter a valid email.'); return; }
+  if (!song)                        { alert('Please select a song.'); return; }
+  if (!txnId)                       { alert('Please enter your UPI Transaction ID.'); return; }
+  if (!file)                        { alert('Please upload your payment screenshot.'); return; }
+
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = 'Sending…';
+
+  try {
+    const base64 = await toBase64(file);
+    const tabLink = TAB_LINKS[song] || 'Link coming soon';
+
+    await fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, email, song, txnId, tabLink, screenshot: base64, fileName: file.name })
+    });
+
+    // Show success (no-cors = can't read response, submission goes through)
+    btn.style.display = 'none';
+    document.getElementById('confirmedEmail').textContent = email;
+    document.getElementById('successBox').classList.add('show');
+
+  } catch (err) {
+    btn.disabled = false;
+    btn.textContent = 'Submit & Get My Tab →';
+    alert('Something went wrong. Please WhatsApp us at +91 75022 51174');
+    console.error(err);
+  }
+}
+
+function toBase64(file) {
+  return new Promise((res, rej) => {
+    const r = new FileReader();
+    r.onload = () => res(r.result.split(',')[1]);
+    r.onerror = rej;
+    r.readAsDataURL(file);
+  });
+}
+</script>
+</body>
+</html>
