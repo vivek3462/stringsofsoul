@@ -146,9 +146,21 @@
     footer p { font-size: 0.78rem; color: var(--muted); }
 
     /* MODAL */
-    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(10,9,6,0.93); z-index: 200; align-items: flex-start; justify-content: center; padding: 2rem 1rem; overflow-y: auto; }
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(10,9,6,0.93); z-index: 200; align-items: flex-start; justify-content: center; padding: 1rem; overflow-y: auto; -webkit-overflow-scrolling: touch; }
     .modal-overlay.open { display: flex; }
-    .modal { background: var(--card); border: 1px solid var(--border); border-radius: 4px; max-width: 500px; width: 100%; padding: 2.5rem; position: relative; margin: auto; }
+    .modal { background: var(--card); border: 1px solid var(--border); border-radius: 4px; max-width: 500px; width: 100%; padding: 1.8rem; position: relative; margin: auto; }
+    @media (max-width: 600px) { .modal { padding: 1.2rem; margin: 0.5rem auto; } }
+    /* Desktop modal pay button */
+    @media (min-width: 601px) {
+      #payBox { flex-direction: row !important; align-items: center !important; }
+      #payBox > div:first-child { flex: 1; }
+      #payBox > a { flex-shrink: 0; padding: 0.75rem 1.5rem !important; align-self: center; }
+      #payBox > p { display: none; }
+    }
+    /* Desktop cover thumbnails — pointer cursor already set, hover effect */
+    .cover-thumb:hover > div { opacity: 0.85; }
+    .cover-thumb img { transition: transform 0.3s; }
+    .cover-thumb:hover img { transform: scale(1.03); }
     .modal-close { position: absolute; top: 1rem; right: 1rem; background: none; border: none; color: var(--muted); font-size: 1.4rem; cursor: pointer; line-height: 1; }
     .modal h2 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--cream); margin-bottom: 0.3rem; }
     .modal > p { color: var(--muted); font-size: 0.87rem; margin-bottom: 1.5rem; }
@@ -376,24 +388,31 @@
           </a>
           <a href="https://wa.me/917502251174" target="_blank" class="contact-link">
             <div class="link-icon"><svg viewBox="0 0 24 24" fill="#25D366"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.2s-.8 1-.9 1.2c-.2.2-.3.2-.6.1-1.7-.8-2.8-1.5-3.9-3.4-.3-.5.3-.5.8-1.5.1-.2 0-.4-.1-.5-.1-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5H8c-.2 0-.5.1-.8.4S6 9.4 6 10.6c0 1.2.9 2.4 1 2.5 1.2 1.8 2.6 3.1 4.1 3.9 2.4 1 3.3.8 3.9.7.6-.1 1.8-.7 2.1-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.3-.8-.5z"/><path d="M12 2C6.5 2 2 6.5 2 12c0 1.9.5 3.7 1.5 5.3L2 22l4.8-1.5C8.3 21.5 10.1 22 12 22c5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.8 0-3.5-.5-4.9-1.4l-.3-.2-3.3 1 1-3.3-.2-.3C3.4 14.6 3 13.3 3 12 3 7.1 7.1 3 12 3s9 4.1 9 9c0 4.9-4.1 9-9 9z"/></svg></div>
-            WhatsApp — +91 75022 51174
+            WhatsApp
           </a>
-          <a href="/cdn-cgi/l/email-protection#98eef1eefdf3abacaeaad8fff5f9f1f4b6fbf7f5" class="contact-link">
+          <a href="https://www.instagram.com/vivek.subramanian.1111/" target="_blank" class="contact-link">
+            <div class="link-icon">
+              <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="16" height="16">
+                <defs><linearGradient id="ig" x1="0%" y1="100%" x2="100%" y2="0%"><stop offset="0%" style="stop-color:#f09433"/><stop offset="50%" style="stop-color:#dc2743"/><stop offset="100%" style="stop-color:#bc1888"/></linearGradient></defs>
+                <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#ig)"/>
+                <circle cx="12" cy="12" r="4.5" stroke="white" stroke-width="1.5" fill="none"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="white"/>
+              </svg>
+            </div>
+            Instagram
+          </a>
+          <a href="mailto:vivek3462@gmail.com" class="contact-link">
             <div class="link-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#c9a84c" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><polyline points="3,5 12,13 21,5"/></svg></div>
-            <span class="__cf_email__" data-cfemail="22544b5447491116141062454f434b4e0c414d4f">[email&#160;protected]</span>
+            Email
           </a>
         </div>
       </div>
       <div>
         <div class="contact-form">
-          <div class="form-group"><label class="form-label">Your Name</label><input class="form-input" id="reqName" type="text" placeholder="Enter your name"/></div>
-          <div class="form-group"><label class="form-label">Your Email</label><input class="form-input" id="reqEmail" type="email" placeholder="your@email.com"/></div>
-          <div class="form-group"><label class="form-label">Song Request</label><input class="form-input" id="reqSong" type="text" placeholder="Song name &amp; movie / artist"/></div>
-          <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" id="reqMessage" placeholder="Any notes or questions..."></textarea></div>
-          <button class="btn-primary" id="reqBtn" onclick="submitSongRequest()">Send Request</button>
-          <div id="reqSuccess" style="display:none;margin-top:1rem;padding:0.9rem 1rem;background:rgba(74,124,89,0.1);border:1px solid rgba(74,124,89,0.3);border-radius:2px;font-size:0.85rem;color:#6aad82;">
-            ✅ Request sent! I'll get back to you soon.
-          </div>
+          <div class="form-group"><label class="form-label">Your Name</label><input class="form-input" type="text" placeholder="Enter your name"/></div>
+          <div class="form-group"><label class="form-label">Song Request</label><input class="form-input" type="text" placeholder="Song name &amp; movie / artist"/></div>
+          <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Any notes or questions..."></textarea></div>
+          <button class="btn-primary" onclick="alert('Message sent! I will get back to you soon.')">Send Request</button>
         </div>
       </div>
     </div>
@@ -418,7 +437,7 @@
     <div class="modal-steps">
       <div class="modal-step">
         <div class="ms-num">1</div>
-        <div class="ms-text"><strong>Pay ₹499 via UPI</strong><span>Copy the ID below and pay on PhonePe, GPay, or any UPI app</span></div>
+        <div class="ms-text"><strong>Pay ₹499 via UPI</strong><span>Tap the button below — opens PhonePe / GPay automatically on your phone</span></div>
       </div>
       <div class="modal-step">
         <div class="ms-num">2</div>
@@ -430,9 +449,40 @@
       </div>
     </div>
 
-    <div class="upi-box">
-      <span class="upi-id">7502251174@ybl</span>
-      <button class="copy-btn" onclick="copyUPI()">Copy UPI</button>
+    <div class="upi-box" style="flex-direction:column;align-items:stretch;gap:0.8rem;" id="payBox">
+      <div style="display:flex;align-items:center;justify-content:space-between;">
+        <div>
+          <div style="font-size:0.7rem;color:var(--gold-dim);font-family:'Space Mono',monospace;letter-spacing:0.1em;margin-bottom:0.2rem;">PAY AMOUNT</div>
+          <div style="font-family:'Playfair Display',serif;font-size:1.6rem;font-weight:900;color:var(--gold);">₹ 499</div>
+        </div>
+        <div style="font-size:0.75rem;color:var(--muted);text-align:right;max-width:160px;line-height:1.4;">via PhonePe · GPay · any UPI app</div>
+      </div>
+      <div id="payActions">
+        <a href="https://phon.pe/ru_7502251174YBL" target="_blank" id="payNowBtn"
+           style="display:flex;align-items:center;justify-content:center;gap:0.5rem;
+                  background:var(--gold);color:var(--bg);text-decoration:none;
+                  padding:0.85rem 1rem;border-radius:2px;font-family:'DM Sans',sans-serif;
+                  font-size:0.95rem;font-weight:600;letter-spacing:0.04em;width:100%;
+                  box-sizing:border-box;transition:background 0.2s;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          <span id="payBtnLabel">Pay Now</span>
+        </a>
+        <p id="payHint" style="font-size:0.72rem;color:var(--muted);text-align:center;margin:0.5rem 0 0;">
+          Opens your UPI app · Take a screenshot after paying
+        </p>
+        <div id="upiDesktop" style="display:none;margin-top:0.6rem;text-align:center;">
+          <div style="font-size:0.75rem;color:var(--muted);margin-bottom:0.8rem;letter-spacing:0.05em;">
+            📷 Scan with your phone camera or UPI app to pay ₹499
+          </div>
+          <div style="display:inline-block;padding:0.8rem;background:#ffffff;border-radius:6px;border:2px solid var(--gold-dim);">
+            <img src="qr.png" alt="Scan to Pay" width="160" height="160"
+              style="display:block;border-radius:2px;"/>
+          </div>
+          <div style="font-size:0.7rem;color:var(--muted);margin-top:0.6rem;">
+            Open Camera app → point at QR → tap the payment link
+          </div>
+        </div>
+      </div>
     </div>
 
     <div class="purchase-form">
@@ -473,7 +523,7 @@
         <div class="success-icon">🎸</div>
         <h3>You're all set!</h3>
         <p>Payment received! Your tab download link will be sent to <strong id="confirmedEmail" style="color:var(--gold)"></strong> within a few hours.</p>
-        <p style="margin-top:0.6rem">Questions? WhatsApp +91 75022 51174</p>
+        <p style="margin-top:0.6rem">Questions? <a href="https://wa.me/917502251174" target="_blank" style="color:var(--gold)">WhatsApp us</a></p>
       </div>
     </div>
   </div>
@@ -487,8 +537,8 @@
 const covers = [
   { id: 'pmZXh8ze558', lang: 'tamil', title: 'Aaja Raja',       movie: 'KH RK Reunion',                    difficulty: 3 },
   { id: 'cgjY7vuKLNc', lang: 'tamil', title: 'CSK Whistle Podu',movie: 'Chennai Super Kings',               difficulty: 2 },
-  { id: 'Q8XstySP8a4', lang: 'tamil', title: 'Pavazha Malli',   movie: 'Pavazhamalli Sai abhayankar',       difficulty: 3 },
-  { id: 'WQN38qGHnfw', lang: 'tamil', title: 'Aura 10/10',   movie: 'Meesaya Muruku 2',       difficulty: 3 },
+  { id: 'Q8XstySP8a4', lang: 'tamil', title: 'Pavazha Malli',   movie: 'Pavazhamalli Sai abhayankar',  difficulty: 3 },
+  { id: 'WQN38qGHnfw', lang: 'tamil', title: 'Aura 10/10',       movie: 'Meesaya Muruku 2',             difficulty: 3 },
 ];
 
 // ══════════════════════════════════════════════════════
@@ -512,7 +562,7 @@ const TAB_LINKS = {
 // Paste your deployed Apps Script Web App URL here
 // (Setup instructions provided separately below)
 // ══════════════════════════════════════════════════════
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyhjJMUOeEd0jOMvMVa0DsivxJojgaSndUA_G10LdBpp94C0Q9p7mC6dTwxFFu5lE9K/exec';
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwH9izZcQrk-_Vsu1riubAZhpSpgH3j7-icIQVZt2CF12ixjuQ_3f-Qc0M0ALybHZIA/exec';
 
 // ── BUILD COVER CARDS ──
 function buildCards(filter) {
@@ -520,10 +570,15 @@ function buildCards(filter) {
   const list = filter === 'all' ? covers : covers.filter(c => c.lang === filter);
   grid.innerHTML = list.map(c => `
     <div class="cover-card">
-      <div class="cover-thumb">
-        <iframe src="https://www.youtube.com/embed/${c.id}" loading="lazy"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen></iframe>
+      <div class="cover-thumb" onclick="playVideo(this,'${c.id}')" style="cursor:pointer;position:relative;">
+        <img src="https://img.youtube.com/vi/${c.id}/hqdefault.jpg"
+          alt="${c.title}" loading="lazy"
+          style="width:100%;height:100%;object-fit:cover;display:block;"/>
+        <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(10,9,6,0.3);">
+          <div style="width:54px;height:54px;border-radius:50%;background:rgba(201,168,76,0.92);display:flex;align-items:center;justify-content:center;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#0a0906"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </div>
       </div>
       <div class="cover-info">
         <span class="cover-lang ${c.lang}">${c.lang === 'tamil' ? 'Tamil' : 'Hindi'}</span>
@@ -547,11 +602,33 @@ function filterCovers(lang, el) {
   buildCards(lang);
 }
 
+function playVideo(el, id) {
+  el.innerHTML = '<iframe src="https://www.youtube.com/embed/'+id+'?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width:100%;height:100%;border:none;"></iframe>';
+}
+
 buildCards('all');
 
 // ── MODAL ──
 function openPayModal(songName) {
-  document.getElementById('payModal').classList.add('open');
+  const _modal = document.getElementById('payModal');
+  _modal.classList.add('open');
+  _modal.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+  // On desktop: show UPI ID hint; on mobile: show Pay Now link
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+  const upiDesktop = document.getElementById('upiDesktop');
+  const payHint    = document.getElementById('payHint');
+  const payNowBtn  = document.getElementById('payNowBtn');
+  const payBtnLabel= document.getElementById('payBtnLabel');
+  if (!isMobile) {
+    if (upiDesktop) upiDesktop.style.display = 'block';
+    if (payHint)    payHint.style.display = 'none';
+    if (payNowBtn)  payNowBtn.style.display = 'none';
+  } else {
+    if (upiDesktop) upiDesktop.style.display = 'none';
+    if (payHint)    payHint.style.display = 'block';
+    if (payNowBtn)  payNowBtn.style.display = 'flex';
+  }
   document.getElementById('successBox').classList.remove('show');
   document.getElementById('submitBtn').style.display = 'block';
   document.getElementById('submitBtn').disabled = false;
@@ -566,20 +643,14 @@ function openPayModal(songName) {
 
 function closePayModal() {
   document.getElementById('payModal').classList.remove('open');
+  document.body.style.overflow = '';
 }
 
 document.getElementById('payModal').addEventListener('click', function(e) {
   if (e.target === this) closePayModal();
 });
 
-// ── COPY UPI ──
-function copyUPI() {
-  navigator.clipboard.writeText('7502251174@ybl').then(() => {
-    const btn = document.querySelector('.copy-btn');
-    btn.textContent = '✓ Copied!';
-    setTimeout(() => btn.textContent = 'Copy UPI', 2000);
-  });
-}
+// ── Payment via PhonePe link ──
 
 // ── FILE UPLOAD ──
 function handleFileChange(input) {
@@ -627,78 +698,5 @@ async function submitPurchase() {
   } catch (err) {
     btn.disabled = false;
     btn.textContent = 'Submit & Get My Tab →';
-    alert('Something went wrong. Please WhatsApp us at +91 75022 51174');
-    console.error(err);
-  }
-}
-
-function toBase64(file) {
-  return new Promise((res, rej) => {
-    const r = new FileReader();
-    r.onload = () => res(r.result.split(',')[1]);
-    r.onerror = rej;
-    r.readAsDataURL(file);
-  });
-}
-
-// ── SONG REQUEST FORM ──
-async function submitSongRequest() {
-  const nameEl    = document.getElementById('reqName');
-  const emailEl   = document.getElementById('reqEmail');
-  const songEl    = document.getElementById('reqSong');
-  const messageEl = document.getElementById('reqMessage');
-  const btn       = document.getElementById('reqBtn');
-  const successEl = document.getElementById('reqSuccess');
-
-  const name    = nameEl.value.trim();
-  const email   = emailEl.value.trim();
-  const song    = songEl.value.trim();
-  const message = messageEl.value.trim();
-
-  if (!name)                         { alert('Please enter your name.'); return; }
-  if (!email || !email.includes('@')){ alert('Please enter a valid email.'); return; }
-  if (!song)                         { alert('Please enter a song name.'); return; }
-
-  btn.disabled = true;
-  btn.textContent = 'Sending…';
-  successEl.style.display = 'none';
-
-  try {
-    await fetch(APPS_SCRIPT_URL, {
-      method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'song_request', name, email, song, message })
-    });
-
-    // Clear fields first
-    nameEl.value    = '';
-    emailEl.value   = '';
-    songEl.value    = '';
-    messageEl.value = '';
-
-    // Show success, reset button
-    successEl.style.display = 'block';
-    btn.disabled    = false;
-    btn.textContent = 'Send Request';
-
-  } catch (err) {
-    btn.disabled = false;
-    btn.textContent = 'Send Request';
-    alert('Something went wrong. Please WhatsApp us at +91 75022 51174');
-  }
-}
-</script>
-</body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
+    alert('Something went wrong. Please WhatsApp us via the contact section.');
+    console.err
