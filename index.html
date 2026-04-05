@@ -4,8 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <!-- SEO & SOCIAL META TAGS -->
-  <meta name="description" content="StringsOfSoul — Fingerstyle guitar covers of Tamil & Hindi film songs. Download accurate guitar tabs for ₹499. Songs include Pavazha Malli, Aaja Raja, CSK Whistle Podu, Aura 10/10."/>
-  <meta name="keywords" content="Tamil guitar tabs, Hindi guitar tabs, fingerstyle guitar, AR Rahman guitar tab, Ilaiyaraaja guitar, Pavazha Malli guitar tab, CSK Whistle Podu guitar tab, Aaja Raja guitar tab, Aura 10/10 guitar tab, guitar tabs India, buy guitar tabs"/>
+  <meta name="description" content="StringsOfSoul — Fingerstyle guitar covers of Tamil & Hindi film songs. Download accurate guitar tabs for ₹499. Songs include Pavazha Malli, Aaja Raja, CSK Whistle Podu, Aura 10/10, Meiyazhagan."/>
+  <meta name="keywords" content="Tamil guitar tabs, Hindi guitar tabs, fingerstyle guitar, AR Rahman guitar tab, Ilaiyaraaja guitar, Pavazha Malli guitar tab, CSK Whistle Podu guitar tab, Aaja Raja guitar tab, Aura 10/10 guitar tab, guitar tabs India, buy guitar tabs, Meiyazhagan guitar tab"/>
   <meta name="author" content="StringsOfSoul"/>
   <meta name="robots" content="index, follow"/>
   <link rel="canonical" href="https://vivek3462.github.io/stringsofsoul/"/>
@@ -477,11 +477,12 @@
         <label class="form-label">Select Song *</label>
         <select class="song-select" id="songSelect">
           <option value="">— Choose a song —</option>
+          <option value="Our Cycle — Meiyazhagan (Tamil)">Our Cycle — Meiyazhagan (Tamil)</option>
           <option value="Aaja Raja — KH RK Reunion (Tamil)">Aaja Raja — KH RK Reunion (Tamil)</option>
           <option value="CSK Whistle Podu — Chennai Super Kings (Tamil)">CSK Whistle Podu — Chennai Super Kings (Tamil)</option>
           <option value="Pavazha Malli — Pavazhamalli Sai abhayankar (Tamil)">Pavazha Malli — Pavazhamalli Sai abhayankar (Tamil)</option>
           <option value="Aura 10/10 — Meesaya Muruku 2 (Tamil)">Aura 10/10 — Meesaya Muruku 2 (Tamil)</option>
-        </select>
+	  </select>
       </div>
       <div class="form-group">
         <label class="form-label">UPI Transaction ID *</label>
@@ -514,6 +515,7 @@
 // Add more songs here as you create covers
 // ══════════════════════════════════════════════════════
 const covers = [
+  { id: 'Sy3JmeGu3hI', lang: 'tamil', title: 'Our Cycle',   movie: 'Meiyazhagan',       difficulty: 3 }, 
   { id: 'pmZXh8ze558', lang: 'tamil', title: 'Aaja Raja',       movie: 'KH RK Reunion',                    difficulty: 3 },
   { id: 'cgjY7vuKLNc', lang: 'tamil', title: 'CSK Whistle Podu',movie: 'Chennai Super Kings',               difficulty: 2 },
   { id: 'Q8XstySP8a4', lang: 'tamil', title: 'Pavazha Malli',   movie: 'Pavazhamalli Sai abhayankar',       difficulty: 3 },
@@ -526,6 +528,8 @@ const covers = [
 // (Right-click folder in Drive → Share → Anyone with link → Copy)
 // ══════════════════════════════════════════════════════
 const TAB_LINKS = {
+  'Our Cycle — Meiyazhagan (Tamil)':
+      'https://drive.google.com/drive/folders/1TNMyJoi98AUJqDdt4sJ25dZ8WbjdYmOg?usp=drive_link',
   'Aaja Raja — KH RK Reunion (Tamil)':
       'https://drive.google.com/drive/folders/1fXhx2AfwEGok2UyRkqESLHCnZRIr5m2f?usp=drive_link',
   'CSK Whistle Podu — Chennai Super Kings (Tamil)':
